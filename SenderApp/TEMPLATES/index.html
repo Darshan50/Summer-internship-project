@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Email Sender Web App</title>
+        <link rel="icon" href="{% static 'IMAGES/icon.png' %}" >
+        <link rel="stylesheet" type="text/css" href="{% static 'CSS/index.css' %}" >
+    </head>
+    <body>
+        <div class="main">
+            <div class="center">
+                <div class="left">
+                    <h2>Email Sender Web App</h2>
+                    <img src="{% static 'IMAGES/mail.jpg' %}">
+                    <h3 class="hide" id="error">
+                        {% if messages %}
+                            {% for message in messages %}
+                                {{message}}
+                            {% endfor %}
+                        {% endif %}
+                    </h3>
+                    
+                </div>
+                <form action='send' method="POST" enctype="multipart/form-data" class="right">
+                    {% csrf_token %}
+                    <input type="email" placeholder="To" name="emailto" required>
+                    <input type="text" placeholder="Subject" name="subject" required>
+                    <textarea rows="8" cols="20" placeholder="Message" name="msg" required></textarea>
+                    <input type="file" class="attach" name="item">
+                    <button type='submit' class="send">Send</button>
+                </form>
+            </div>
+        </div>
+        <script src="{% static 'JS/index.js' %}"></script>
+
+    </body>
+
+</html>
